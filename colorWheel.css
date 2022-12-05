@@ -1,0 +1,136 @@
+*{
+    --wheel-changing-gradient: conic-gradient(
+        hsl(0, var(--saturation), var(--lightness)), 
+        hsl(30deg, var(--saturation), var(--lightness)), 
+        hsl(60deg, var(--saturation), var(--lightness)), 
+        hsl(90deg, var(--saturation), var(--lightness)), 
+        hsl(120deg, var(--saturation), var(--lightness)), 
+        hsl(150deg, var(--saturation), var(--lightness)), 
+        hsl(180deg, var(--saturation), var(--lightness)), 
+        hsl(210deg, var(--saturation), var(--lightness)), 
+        hsl(240deg, var(--saturation), var(--lightness)), 
+        hsl(270deg, var(--saturation), var(--lightness)), 
+        hsl(300deg, var(--saturation), var(--lightness)), 
+        hsl(330deg, var(--saturation), var(--lightness)), 
+        hsl(360deg, var(--saturation), var(--lightness))
+    );
+    --wheel-static-gradient: conic-gradient(
+        hsl(0, 100%, 50%), 
+        hsl(30deg, 100%, 50%), 
+        hsl(60deg, 100%, 50%), 
+        hsl(90deg, 100%, 50%), 
+        hsl(120deg, 100%, 50%), 
+        hsl(150deg, 100%, 50%), 
+        hsl(180deg, 100%, 50%), 
+        hsl(210deg, 100%, 50%), 
+        hsl(240deg, 100%, 50%), 
+        hsl(270deg, 100%, 50%), 
+        hsl(300deg, 100%, 50%), 
+        hsl(330deg, 100%, 50%), 
+        hsl(360deg, 100%, 50%)
+    )
+}
+
+.color-picker{
+    --clr-marker: #000;
+    --clr-marker-outline: #fff;
+    width: 50rem;
+
+    display: grid;
+    grid-auto-rows: min-content 1fr 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.color-picker-data-holder{
+    --hue: 0deg;
+    --saturation: 100%;
+    --lightness: 50%;
+}
+
+.color-picker__wheel{
+    border-radius: 100%;
+    background-image: var(--wheel-static-gradient);
+    width: 10rem;
+    height: 10rem;
+    position: relative;
+    touch-action: pan-y;
+}
+.color-picker__wheel::after{
+    content: '';
+    border-radius: 100%;
+    width: 4rem;
+    height: 4rem;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.color-picker__wheel__marker{
+    position: absolute;
+    transform-origin: bottom;
+    bottom: 50%;
+    left: 50%;
+    translate: -50%;
+    height: 50%;
+    width: .2rem;
+    background-color: var(--clr-marker);
+    transform: rotate( var(--hue) );
+    outline: .1rem solid var(--clr-marker-outline);
+    pointer-events: none;
+    touch-action: none;
+}
+.color-picker__wheel__color-output{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 3.5rem;
+    width: 3.5rem;
+    background-color: hsl( var(--hue) , var(--saturation), var(--lightness));
+    border-radius: 100%;
+    z-index: 10;
+    display: grid;
+    place-content: center;
+    outline: .2rem solid var(--clr-marker);
+    outline-offset: .2rem;
+}
+
+.color-picker__slider{
+    width: 100%;
+    height: 2rem;
+    position: relative;
+    pointer-events: all;
+    touch-action: pan-y;
+}
+.color-picker__slider::after{
+    content: '';
+    width: .2rem;
+    height: 100%;
+    background-color: var(--clr-marker);
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    outline: .1rem solid var(--clr-marker-outline);
+    pointer-events: none;
+}
+
+.color-picker__slider.saturation{
+    background-image: linear-gradient(to left, hsl( var(--hue) , 100%, var(--lightness)), hsl( var(--hue) , 0%, var(--lightness)));
+}
+.color-picker__slider.saturation::after{
+    left: var(--saturation);
+}
+
+.color-picker__slider.lightness{
+    background-image: linear-gradient(to left, hsl( var(--hue) , var(--saturation), 100%), hsl( var(--hue) , var(--saturation), 50%), hsl( var(--hue) , var(--saturation), 0%));
+}
+.color-picker__slider.lightness::after{
+    left: var(--lightness);
+}
+
+.color-picker__text-output{
+    white-space: nowrap;
+
+}

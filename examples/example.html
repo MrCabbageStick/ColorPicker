@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Wheel Example</title>
+    <link rel="stylesheet" href="../colorWheel.css">
+    <script src="../colorWheelOOP.js"></script>
+    <script src="./example.js" defer></script>
+</head>
+<body>
+
+    <section class="color-picker color-picker-data-holder" js-color-wheel-data>
+
+        <div class="color-picker__wheel" js-color-wheel>
+            <div class="color-picker__wheel__marker"></div>
+            <div class="color-picker__wheel__color-output" js-color-wheel-output></div>
+        </div>
+
+        <div class="color-picker__slider saturation" js-saturation-slider></div>
+
+        <div class="color-picker__slider lightness" js-lightness-slider></div>
+
+        <code class="color-picker__text-output" js-color-wheel-text-output>hsl(0deg, 0%, 0%)</code>
+
+    </section>
+    
+</body>
+</html>
