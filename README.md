@@ -9,5 +9,5 @@ Made mostly for use in my future projects.
 ### Usage
 
 Download a file: ```colorWheel.js```.\
-To use it with an HTML file add a script tag: ```<script src="path/to/colorWheel.js">```.\
+To use it in HTML add a script tag: ```<script src="path/to/colorWheel.js">```.\
 Then create an object based on a ```colorPicker``` class (constructor parameters are described with JsDoc).
