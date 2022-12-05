@@ -125,15 +125,18 @@ class CirclularSlider extends SliderObject{
         let wheel_pos = this.elem.getBoundingClientRect()
         let wheel_center = {x: wheel_pos.x + wheel_pos.width / 2, y: wheel_pos.y + wheel_pos.height / 2}
 
-        let relative_mouse_pos = {x: (e.clientX - wheel_center.x), y: (e.clientY - wheel_center.y)}
-        if(relative_mouse_pos.x === 0 && relative_mouse_pos.y === 0) relative_mouse_pos = {x: 1, y: 1}
+        let offset = {x: (e.clientX - wheel_center.x), y: (wheel_center.y - e.clientY)}
 
-        let angle = (relative_mouse_pos.y >= 0)
-                    ? Math.atan(-relative_mouse_pos.x / relative_mouse_pos.y) + Math.PI
-                    : Math.atan(relative_mouse_pos.x / -relative_mouse_pos.y)
+        let radius = Math.sqrt( Math.pow(offset.x, 2) + Math.pow(offset.y, 2) );
+        let angle = 2 * Math.atan( offset.y / (offset.x + radius) );
 
-        // Radians to degrees conversion
         angle = angle * 180 / Math.PI
+
+        angle -= 90;
+        angle *= -1;
+
+        if(isNaN(angle)) angle = 270;
+        if(angle < 0) angle += 360;
 
         return angle
     }
